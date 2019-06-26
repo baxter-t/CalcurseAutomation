@@ -6,6 +6,11 @@
 import datetime
 import smtplib
 
+gmail_user = "YOUR EMAIL ADDRESS HERE"
+gmail_password = "YOUR PASSWORD HERE"
+receiver = "EMAIL ADDRESS TO RECIEVE SCHEDULE HERE"
+pathToCalcurse = "PATH TO .calcurse HERE"
+
 def sendEmail(apts, todos):
 	"""Send email of todays schedule
 	
@@ -13,11 +18,9 @@ def sendEmail(apts, todos):
 	    apts (str): str containing all appoinntments, formatted
 	    todos (str): str containing all todo, formatted
 	"""
-	gmail_user = 'YOUR EMAIL ADDRESS HERE'  
-	gmail_password = 'YOUR PASSWORD HERE'
 
 	sent_from = gmail_user  
-	to = ['EMAIL ADDRESS TO RECEIVE SCHEDULE HERE']  
+	to = [receiver]  
 	subject = 'Daily Schedule'  
 
 	email_text = "\nFrom: {}\nTo: {}\nSubject: {}\n\n| --------------- Daily Schedule --------------- |\n\n{}\n| -------------------- Todo -------------------- |\n\n{}".format(sent_from, ", ".join(to), subject, apts, todos)
@@ -78,7 +81,7 @@ def parseApts():
 	    List<tuple<str, datetime, datetime>>: list of tuples holding name, 
 	    	start and end time
 	"""
-	apts = open('PATH TO .calcurse/apts', 'r') # Will generally be ~/.calcurse/apts on mac
+	apts = open(pathToCalcurse + '/apts', 'r')
 	appointmentsToday = []
 
 	for line in apts :
@@ -111,7 +114,7 @@ def parseTodo():
 	Returns:
 	    List<Tuple<int, str>>: list of tuples containing the weight and name
 	"""
-	file = open('PATH TO.calcurse/todo', 'r') # Will generally be ~/.calcurse/todo on Mac
+	file = open(pathToCalcurse + '/todo', 'r')
 	todos = []
 
 	for line in file :
